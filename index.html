@@ -25,11 +25,11 @@
       <div id="image-container">
 
         <div class="image-box" id="left-image">
-          <img src="lefttransparent.png" alt="">
+          <img src="lefttransparent.png" alt="" id="left">
         </div>
 
         <div class="image-box" id="right-image">
-            <img src="rightclear.png" alt="" >
+            <img src="rightclear.png" alt="" id="right">
         </div>
 
     </div>
@@ -40,6 +40,10 @@
     </div>
 
 
+
+    <div class="slidecontainer">
+      <input type="range" min="150" max="450" value="250" class="slider" id="myZoom">
+    </div>
 
 
     <h3 class="text-center">Distance Apart: <span id="distance">0px</span></h3>
@@ -70,10 +74,24 @@ var slider = document.getElementById("myRange");
 var left = document.getElementById("left-image");
 var right = document.getElementById("right-image");
 
+
+var leftI = document.getElementById("left");
+var rightI = document.getElementById("right");
+
+
 var crossingHighScore = 0;
 var relaxingHighScore = 0;
 
 
+
+var zoom = document.getElementById("myZoom");
+
+
+
+zoom.oninput = function(){
+  leftI.style.width = this.value+"px";
+  rightI.style.width = this.value+"px";
+}
 
 function updateRelaxing() {
 
