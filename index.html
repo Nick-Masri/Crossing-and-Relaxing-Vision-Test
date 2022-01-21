@@ -18,7 +18,7 @@
 <div id="container">
     <div id="header">
 
-        <h1 id="intro" class="text-center">Crossing and Relaxing Test</h1>
+        <h1 id="intro" class="text-center">Convergence and Divergence Test</h1>
 
     </div>
 
@@ -35,26 +35,27 @@
     </div>
 
 
+<br>
+
+    <h3 class="text-center">Distance Apart: <span id="distance">0px</span></h3>
+
     <div class="slidecontainer">
       <input type="range" min="1" max="300" value="10" class="slider" id="myRange">
     </div>
 
-
+    <h3 class="text-center">Zoom: <span id="zoom">1x</span></h3>
 
     <div class="slidecontainer">
       <input type="range" min="150" max="450" value="250" class="slider" id="myZoom">
     </div>
-
-
-    <h3 class="text-center">Distance Apart: <span id="distance">0px</span></h3>
-
+    <br>
 
     <div class="text-center">
       <button type="button" class="btn btn-success" onclick="updateRelaxing()">Successfully Relaxed</button>
       <button type="button" class="btn btn-success" onclick="updateCrossing()">Successfully Crossed</button>
     </div>
 
-    <hr>
+    <br>
 
 
     <div class="text-center">
@@ -63,10 +64,14 @@
 
 
 
+
  <p id="relaxing">Relaxing: <span id="relaxingScore">0</span>px</p>
   <p id="crossing">Crossing: <span id="crossingScore">0</span>px</p>
 
 </div>
+
+<br>
+<br>
 
 <script>
 
@@ -85,12 +90,14 @@ var relaxingHighScore = 0;
 
 
 var zoom = document.getElementById("myZoom");
+var zoomDisplay = document.getElementById("zoom");
 
 
 
 zoom.oninput = function(){
   leftI.style.width = this.value+"px";
   rightI.style.width = this.value+"px";
+  zoomDisplay.textContent = (this.value/250) + "x";
 }
 
 function updateRelaxing() {
