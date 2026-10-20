@@ -1,145 +1,35 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-    <title>Vision Test</title>
-
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
-
-
-<div id="container">
-    <div id="header">
-
-        <h1 id="intro" class="text-center">Convergence and Divergence Test</h1>
-
-    </div>
-
-      <div id="image-container">
-
-        <div class="image-box" id="left-image">
-          <img src="lefttransparent.png" alt="" id="left">
-        </div>
-
-        <div class="image-box" id="right-image">
-            <img src="rightclear.png" alt="" id="right">
-        </div>
-
-    </div>
-
-
-<br>
-
-    <h3 class="text-center">Distance Apart: <span id="distance">0px</span></h3>
-
-    <div class="slidecontainer">
-      <input type="range" min="1" max="300" value="10" class="slider" id="myRange">
-    </div>
-
-    <h3 class="text-center">Zoom: <span id="zoom">1x</span></h3>
-
-    <div class="slidecontainer">
-      <input type="range" min="150" max="450" value="250" class="slider" id="myZoom">
-    </div>
-    <br>
-
-    <div class="text-center">
-      <button type="button" class="btn btn-success" onclick="updateRelaxing()">Successfully Relaxed</button>
-      <button type="button" class="btn btn-success" onclick="updateCrossing()">Successfully Crossed</button>
-    </div>
-
-    <br>
-
-
-    <div class="text-center">
-
-    <h3>Your Bests:</h3>
-
-
-
-
- <p id="relaxing">Relaxing: <span id="relaxingScore">0</span>px</p>
-  <p id="crossing">Crossing: <span id="crossingScore">0</span>px</p>
-
-</div>
-
-<br>
-<br>
-
-<script>
-
-var slider = document.getElementById("myRange");
-var left = document.getElementById("left-image");
-var right = document.getElementById("right-image");
-
-
-var leftI = document.getElementById("left");
-var rightI = document.getElementById("right");
-
-
-var crossingHighScore = 0;
-var relaxingHighScore = 0;
-
-
-
-var zoom = document.getElementById("myZoom");
-var zoomDisplay = document.getElementById("zoom");
-
-
-
-zoom.oninput = function(){
-  leftI.style.width = this.value+"px";
-  rightI.style.width = this.value+"px";
-  zoomDisplay.textContent = (this.value/250) + "x";
-}
-
-function updateRelaxing() {
-
-  if (2*slider.value > relaxingHighScore){
-    relaxingHighScore = 2*slider.value;
-  }
-  document.getElementById("relaxingScore").textContent = relaxingHighScore;
-}
-
-function updateCrossing() {
-  if (2*slider.value > crossingHighScore){
-    crossingHighScore = 2*slider.value;
-  }
-  document.getElementById("crossingScore").textContent = crossingHighScore;
-}
-
-left.style.marginRight = slider.value; // Display the default slider value
-right.style.marginLeft = slider.value; // Display the default slider value
-
-// Update the current slider value (each time you drag the slider handle)
-slider.oninput = function() {
-// images.style.margin = "0 " + this.value +"px";
-
-document.getElementById("distance").textContent=2*this.value + "px";
-left.style.marginRight = this.value +"px"; // Display the default slider value
-right.style.marginLeft = this.value +"px"; // Display the default slider value
-
-}
-
-
-
-</script>
-    <!-- Optional JavaScript; choose one of the two! -->
-
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    -->
-  </body>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Screen-based vision therapy exercises: vergence, pursuits, saccades, VOR and more, with progress tracking.">
+  <title>Vision Trainer</title>
+  <script>
+    try {
+      var s = JSON.parse(localStorage.getItem('vt:settings') || '{}');
+      if (s.theme) document.documentElement.dataset.theme = s.theme;
+    } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a href="#/" class="brand">
+      <svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true"><circle cx="11" cy="16" r="8" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="21" cy="16" r="8" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>
+      <span class="brand-text">Vision Trainer</span>
+    </a>
+    <nav class="topnav">
+      <a href="#/" data-nav="home">Exercises</a>
+      <a href="#/progress" data-nav="progress">Progress</a>
+      <a href="#/settings" data-nav="settings">Settings</a>
+    </nav>
+  </header>
+  <main id="app"></main>
+  <footer class="foot">
+    Not medical advice. Use alongside the plan from your optometrist or vision therapist.
+    Stop and rest if headache, dizziness, nausea or double vision gets worse.
+  </footer>
+  <script src="app.js"></script>
+</body>
 </html>
